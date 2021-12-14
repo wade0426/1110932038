@@ -1,152 +1,47 @@
 <!DOCTYPE html>
-<html long='en'>
+<html lang="en">
 <head>
-	<meta charset="utf-8">
+	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>九九乘法表-js</title>
 	<style>
-		table{
-			border-color: black;
-			border-style: solid;
+		span{
+			display: inline-block;
+			width: 20px;
+			text-emphasis: right;
+			text-align: right;
 		}
-		.t1{
-			align:center;
-			padding-left: 25px; 
-		}
-		
+		thead{
+			border-collapse: collapse;
+			background: #000;
+			color: #FFF;
+			font-weight: bold;
+			font-size: 14px;
+			text-align: center;
 	</style>
 </head>
 <body>
-	<center><a href="index.html">回首頁</a></center>
-	<table border="1" align="center"width="300"style="border-spacing:0px;">
-		<th colspan="3"style="color: #FFF;font-size:14px;background-color: #000;font-weight: bold;">九九乘法表-js </th>	
-			<tr>
-				<td class="t1">
-					<script>
-						for (i=1;i<10;i++){
-							for (j=1;j<2;j++){
-							document.write(i + "*" + j + "=&nbsp;&nbsp;" + i*j+'<br>');
-							}
-						}	
-					</script>
-				</td>
-				<td class="t1">
-					<script>
-						for (i=1;i<10;i++){
-							for (j=2;j<3;j++){
-							if(i<5){
-							document.write(i + "*" + j + "=&nbsp;&nbsp;" + i*j+'<br>');
-							}
-							else{
-							document.write(i + "*" + j + "=" + i*j+'<br>');								
-							}
-						}
-						}	
-					</script>
-				</td>
-				<td class="t1">
-					<script>
-						for (i=1;i<10;i++){
-							for (j=3;j<4;j++){
-							if(i<4){
-							document.write(i + "*" + j + "=&nbsp;&nbsp;" + i*j+'<br>');
-							}
-							else{
-							document.write(i + "*" + j + "=" + i*j+'<br>');								
-							}
-							}	
-						}	
-					</script>
-				</td>
-			</tr>
-			<tr>
-				<td class="t1">
-					<script>
-						for (i=1;i<10;i++){
-							for (j=4;j<5;j++){
-							if(i<3){
-							document.write(i + "*" + j + "=&nbsp;&nbsp;" + i*j+'<br>');
-							}
-							else{
-							document.write(i + "*" + j + "=" + i*j+'<br>');								
-							}
-							}
-						}	
-					</script>
-				</td>
-				<td class="t1">
-					<script>
-						for (i=1;i<10;i++){
-							for (j=5;j<6;j++){
-							if(i<2){
-							document.write(i + "*" + j + "=&nbsp;&nbsp;" + i*j+'<br>');
-							}
-							else{
-							document.write(i + "*" + j + "=" + i*j+'<br>');								
-							}
-							}
-						}	
-					</script>
-				</td>
-				<td class="t1">
-					<script>
-						for (i=1;i<10;i++){
-							for (j=6;j<7;j++){
-							if(i<2){
-							document.write(i + "*" + j + "=&nbsp;&nbsp;" + i*j+'<br>');
-							}
-							else{
-							document.write(i + "*" + j + "=" + i*j+'<br>');								
-							}
-							}
-					}	
-					</script>
-				</td>
-			</tr>
-			<tr>
-				<td class="t1">
-					<script>
-						for (i=1;i<10;i++){
-							for (j=7;j<8;j++){
-							if(i<2){
-							document.write(i + "*" + j + "=&nbsp;&nbsp;" + i*j+'<br>');
-							}
-							else{
-							document.write(i + "*" + j + "=" + i*j+'<br>');								
-							}
-							}
-						}	
-					</script>
-				</td>
-				<td class="t1">
-					<script>
-						for (i=1;i<10;i++){
-							for (j=8;j<9;j++){
-							if(i<2){
-							document.write(i + "*" + j + "=&nbsp;&nbsp;" + i*j+'<br>');
-							}
-							else{
-							document.write(i + "*" + j + "=" + i*j+'<br>');								
-							}
-						}
-						}	
-					</script>
-				</td>
-				<td class="t1">
-					<script>
-						for (i=1;i<10;i++){
-							for (j=9;j<10;j++){
-							if(i<2){
-							document.write(i + "*" + j + "=&nbsp;&nbsp;" + i*j+'<br>');
-							}
-							else{
-							document.write(i + "*" + j + "=" + i*j+'<br>');								
-							}
-						}
-						}	
-					</script>
-				</td>
-			</tr>
+	<center>
+	<table border="1">
+		<thead>
+			<td colspan="4">九九乘法表-js</td>
+		</thead>
+		<script>
+			for(i=1;i<=9;i++)
+			{
+				if(i%3==1)
+					document.write("<tr>");
+				document.write("<td>");
+				for(j=1;j<=9;j++)
+				{
+					document.write(i+" * "+j+"=<span>"+(i*j)+"</span><br>");
+				}
+				document.write("</td>");
+				if(i%3==0)
+					document.write("</tr>");
+			} 
+		</script>
 	</table>
+	</center>
 </body>
 </html>
