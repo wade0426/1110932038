@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>月曆</title>
+  <style>
+    body {
+        display: flex;
+        justify-content: center;
+        align-items:start;
+        height: 100vh;
+        margin: 0;
+    }
+
+    .calendar {
+        width: 100%;
+        max-width: 400px;
+        font-family: Arial, sans-serif;
+        text-align: center;
+        background-color: #f2f2f2;
+        padding: 10px;
+        border-radius: 5px;
+        box-sizing: border-box;
+    }
+
+    .calendar-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background-color: #ffa500;
+        color: white;
+        padding: 10px;
+        border-radius: 5px 5px 0 0;
+    }
+
+    .calendar-grid {
+        display: grid;
+        grid-template-columns: repeat(7, 1fr);
+        grid-gap: 1px;
+        background-color: white;
+        width: 100%;
+        box-sizing: border-box;
+    }
+
+    .calendar-grid div {
+        padding: 10px;
+        cursor: pointer;
+    }
+
+    .calendar-grid div.selected {
+        background-color: #ffa500;
+        color: white;
+        border-radius: 50%; 
+    }
+
+    .date-info {
+        margin-top: 10px;
+        font-weight: bold;
+    }
+
+    @media (max-width: 480px) {
+        .calendar {
+            max-width: 300px;
+        }
+
+        .calendar-header {
+            flex-direction: column;
+            align-items: stretch;
+        }
+
+        .calendar-header div {
+            margin-top: 10px;
+        }
+
+        .calendar-grid div {
+            padding: 5px;
+            font-size: 14px;
+        }
+    }
+  </style>
+</head>
+<body>
+  <div class="calendar">
+    <div class="calendar-header">
+      <button id="prev-month">&#8249;</button>
+      <div>
+        <select id="year-select"></select>
+        <select id="month-select"></select>
+      </div>
+      <button id="next-month">&#8250;</button>
+    </div>
+    <div class="calendar-grid">
+      <div>S</div>
+      <div>M</div>
+      <div>T</div>
+      <div>W</div>
+      <div>T</div>
+      <div>F</div>
+      <div>S</div>
+    </div>
+    <div class="date-info"></div>
+  </div>
+
+  <script>
+    const today = new Date();
+    let currentYear = today.getFullYear();
+    let currentMonth = today.getMonth();
+
+    const yearSelect = document.getElementById('year-select');
+    const monthSelect = document.getElementById('month-select');
+    const calendarGrid = document.querySelector('.calendar-grid');
+    const dateInfo = document.querySelector('.date-info');
+
+    // 填入年份選項
+    for (let year = currentYear - 10; year <= currentYear + 10; year++) {
+      const option = document.createElement('option');
+      option.value = year;
+      option.text = year;
+      yearSelect.add(option);
+    }
+
+    // 填入月份選項
+    const months = ['一月', '二月', '三月', '四月', '五月', '六月', '七月', '八月', '九月', '十月', '十一月', '十二月'];
+    for (let i = 0; i < months.length; i++) {
+      const option = document.createElement('option');
+      option.value = i;
+      option.text = months[i];
+      monthSelect.add(option);
+    }
+
+    // 設定初始年份和月份
+    yearSelect.value = currentYear;
+    monthSelect.value = currentMonth;
+
+    // 渲染月曆
+    renderCalendar(currentYear, currentMonth);
+
+    // 監聽年份和月份變更
+    yearSelect.addEventListener('change', updateCalendar);
+    monthSelect.addEventListener('change', updateCalendar);
+
+    // 監聽上一個月和下一個月按鈕
+    document.getElementById('prev-month').addEventListener('click', prevMonth);
+    document.getElementById('next-month').addEventListener('click', nextMonth);
+
+    function renderCalendar(year, month) {
+      const daysInMonth = new Date(year, month + 1, 0).getDate();
+      const firstDayOfMonth = new Date(year, month, 1).getDay();
+
+      calendarGrid.innerHTML = '';
+
+      // 渲染星期
+      const weekdays = ['S', 'M', 'T', 'W', 'T', 'F', 'S'];
+      for (let i = 0; i < 7; i++) {
+        const weekday = document.createElement('div');
+        weekday.textContent = weekdays[i];
+        calendarGrid.appendChild(weekday);
+      }
+
+      // 渲染日期格子
+      let date = 1;
+      for (let i = 0; i < 6; i++) {
+        for (let j = 0; j < 7; j++) {
+          if (i === 0 && j < firstDayOfMonth) {
+            calendarGrid.appendChild(document.createElement('div'));
+          } else if (date > daysInMonth) {
+            break;
+          } else {
+            const day = document.createElement('div');
+            day.textContent = date;
+            day.addEventListener('click', selectDate);
+            calendarGrid.appendChild(day);
+            date++;
+          }
+        }
+      }
+    }
+
+    function updateCalendar() {
+      const selectedYear = parseInt(yearSelect.value);
+      const selectedMonth = parseInt(monthSelect.value);
+      currentYear = selectedYear;
+      currentMonth = selectedMonth;
+      renderCalendar(selectedYear, selectedMonth);
+      dateInfo.textContent = '';
+    }
+
+    function selectDate(event) {
+      const selectedDate = event.target;
+      const allDates = calendarGrid.querySelectorAll('div:not(:nth-child(-n+7))');
+      allDates.forEach(date => date.classList.remove('selected'));
+      selectedDate.classList.add('selected');
+
+      const year = currentYear;
+      const month = currentMonth + 1;
+      const day = selectedDate.textContent;
+      const formattedDate = `${year}年${month}月${day}日`;
+      dateInfo.textContent = formattedDate;
+      console.log(formattedDate); //顯示選擇的日期
+    }
+
+    function prevMonth() {
+      currentMonth--;
+      if (currentMonth < 0) {
+        currentYear--;
+        currentMonth = 11;
+      }
+      yearSelect.value = currentYear;
+      monthSelect.value = currentMonth;
+      renderCalendar(currentYear, currentMonth);
+      dateInfo.textContent = '';
+    }
+
+    function nextMonth() {
+      currentMonth++;
+      if (currentMonth > 11) {
+        currentYear++;
+        currentMonth = 0;
+      }
+      yearSelect.value = currentYear;
+      monthSelect.value = currentMonth;
+      renderCalendar(currentYear, currentMonth);
+      dateInfo.textContent = '';
+    }
+  </script>
+</body>
+</html>
