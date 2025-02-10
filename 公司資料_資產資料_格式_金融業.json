@@ -16,6 +16,21 @@
               "subSubChapterTitle": "報告期間",
               "BlockID": "UUID",
               "access_permissions": "PermissionChapterID"
+            },
+            {
+              "subSubChapterTitle": "範疇與邊界",
+              "BlockID": "UUID",
+              "access_permissions": "PermissionChapterID"
+            },
+            {
+              "subSubChapterTitle": "報告書撰寫原則",
+              "BlockID": "UUID",
+              "access_permissions": "PermissionChapterID"
+            },
+            {
+              "subSubChapterTitle": "聯絡資訊",
+              "BlockID": "UUID",
+              "access_permissions": "PermissionChapterID"
             }
           ]
         }
@@ -44,6 +59,36 @@
             },
             {
               "subSubChapterTitle": "永續目標",
+              "BlockID": "UUID",
+              "access_permissions": "PermissionChapterID"
+            }
+          ]
+        },
+        {
+          "subChapterTitle": "重大主題分析",
+          "subSubChapters": [
+            {
+              "subSubChapterTitle": "重大主題鑑別流程",
+              "BlockID": "UUID",
+              "access_permissions": "PermissionChapterID"
+            },
+            {
+              "subSubChapterTitle": "重大主題管理",
+              "BlockID": "UUID",
+              "access_permissions": "PermissionChapterID"
+            }
+          ]
+        },
+        {
+          "subChapterTitle": "利害關係人溝通",
+          "subSubChapters": [
+            {
+              "subSubChapterTitle": "利害關係人鑑別",
+              "BlockID": "UUID",
+              "access_permissions": "PermissionChapterID"
+            },
+            {
+              "subSubChapterTitle": "利害關係人議和",
               "BlockID": "UUID",
               "access_permissions": "PermissionChapterID"
             }
